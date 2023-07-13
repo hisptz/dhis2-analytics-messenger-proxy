@@ -9,6 +9,6 @@ COPY yarn.lock /proxy/
 
 RUN yarn install --production
 
-EXPOSE 3000
+EXPOSE 8089
 
-ENTRYPOINT ["node", "app/src/index.js"]
+ENTRYPOINT ["node", "app/index.js"]

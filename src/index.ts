@@ -9,17 +9,21 @@ import {isEmpty} from "lodash";
 import express from "express";
 import {config} from "dotenv";
 import helmet from "helmet";
+import cors from "cors";
 
 config()
 const port = process.env.PORT || 3000;
 const apiMountPoint = process.env.API_MOUNT_POINT || "/api";
 const app = express();
 
-app.use(express.json());
 
+app.use(express.json());
 app.use(apiKeyAuth(/^API_KEY/));
 app.use(helmet.contentSecurityPolicy({
     useDefaults: true
+}))
+app.use(cors({
+    origin: "*"
 }))
 const limiter = RateLimit({
     windowMs: 60 * 1000,
