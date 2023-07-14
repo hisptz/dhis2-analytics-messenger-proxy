@@ -32,9 +32,6 @@ const limiter = RateLimit({
 })
 app.use(limiter);
 
-app.use(express.urlencoded({extended: true}));
-
-
 function getAuth(credentials?: Credentials) {
     if (!credentials) {
         return;
