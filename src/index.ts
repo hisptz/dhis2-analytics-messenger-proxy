@@ -10,8 +10,10 @@ import express from "express";
 import {config} from "dotenv";
 import helmet from "helmet";
 import cors from "cors";
+import {sanitizeEnv} from "./utils/env";
 
-config()
+config();
+sanitizeEnv();
 const port = process.env.PORT || 3000;
 const apiMountPoint = process.env.API_MOUNT_POINT || "/api";
 const corsWhitelist = process.env.CORS_WHITELIST?.split(',') ?? [];
