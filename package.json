@@ -9,8 +9,7 @@
   "scripts": {
     "start": "node app/src/index.js",
     "dev": "nodemon -x ts-node-esm src/index.ts --files",
-    "build": "tsc -p .",
-    "postbuild": "./postbuild.sh"
+    "build": "tsc -p ."
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
