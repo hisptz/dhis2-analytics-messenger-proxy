@@ -20,7 +20,17 @@ const corsWhitelist = process.env.CORS_WHITELIST?.split(',') ?? [];
 const app = express();
 
 app.use(cors({
-    origin: corsWhitelist,
+    origin: (origin, callback) => {
+        if (isEmpty(corsWhitelist)) {
+            callback(null, true);
+        }
+        if (!origin) {
+            callback(null, true);
+        }
+        if (!corsWhitelist.some((item) => origin?.match(item))) {
+            callback(new Error("Not allowed by CORS"))
+        }
+    },
     preflightContinue: false
 }))
 app.use(apiKeyAuth(/^API_KEY/,));
