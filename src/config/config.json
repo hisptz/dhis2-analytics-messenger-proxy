@@ -4,29 +4,25 @@
     {
       "path": "/bot",
       "target": {
-        "url": "http://chat-bot:3000/api",
-        "credentials": {
-          "type": "apiKey",
-          "value": "vGURAyFRE6mH4Hpn4FcSlJVNEd3oZK8IQLH3ZZj6OnHcP1wEIjLkYlpZrOBBMaMZ"
-        }
+        "url": "http://chat-bot:4010"
       }
     },
     {
       "path": "/whatsapp",
       "target": {
-        "url": "http://whatsapp:3000"
+        "url": "http://whatsapp:4000"
       }
     },
     {
       "path": "/visualizer",
       "target": {
-        "url": "http://visualizer:7000"
+        "url": "http://visualizer:4030"
       }
     },
     {
       "path": "/mediator",
       "target": {
-        "url": "http://mediator:5000"
+        "url": "http://mediator:4020"
       }
     }
   ]
