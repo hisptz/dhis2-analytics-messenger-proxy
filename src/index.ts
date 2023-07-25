@@ -19,20 +19,7 @@ const apiMountPoint = process.env.API_MOUNT_POINT || "/api";
 const corsWhitelist = process.env.CORS_WHITELIST?.split(',') ?? [];
 const app = express();
 
-app.use(cors({
-    origin: (origin, callback) => {
-        if (isEmpty(corsWhitelist)) {
-            callback(null, true);
-        }
-        if (!origin) {
-            callback(null, true);
-        }
-        if (!corsWhitelist.some((item) => origin?.match(item))) {
-            callback(new Error("Not allowed by CORS"))
-        }
-    },
-    preflightContinue: false
-}))
+app.use(cors())
 app.use(apiKeyAuth(/^API_KEY/,));
 app.use(helmet.contentSecurityPolicy({
     useDefaults: true
