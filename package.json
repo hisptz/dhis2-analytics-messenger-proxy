@@ -1,6 +1,6 @@
 {
   "name": "dhis2-messenger-server-proxy",
-  "version": "1.0.1",
+  "version": "1.0.0-beta.00",
   "description": "A proxy server to expose required DHIS2 analytics messenger services",
   "main": "index.js",
   "author": "HISP Tanzania",
