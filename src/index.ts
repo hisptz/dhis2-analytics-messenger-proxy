@@ -9,26 +9,27 @@ import {isEmpty} from "lodash";
 import express from "express";
 import {config} from "dotenv";
 import helmet from "helmet";
+import cors from "cors";
+import {sanitizeEnv} from "./utils/env";
 
-config()
+config();
+sanitizeEnv();
 const port = process.env.PORT || 3000;
 const apiMountPoint = process.env.API_MOUNT_POINT || "/api";
+const corsWhitelist = process.env.CORS_WHITELIST?.split(',') ?? [];
 const app = express();
 
-app.use(express.json());
-
-app.use(apiKeyAuth(/^API_KEY/));
+app.use(cors())
+app.use(apiKeyAuth(/^API_KEY/,));
 app.use(helmet.contentSecurityPolicy({
     useDefaults: true
 }))
+
 const limiter = RateLimit({
     windowMs: 60 * 1000,
     max: 100
 })
 app.use(limiter);
-
-app.use(express.urlencoded({extended: true}));
-
 
 function getAuth(credentials?: Credentials) {
     if (!credentials) {
@@ -57,6 +58,7 @@ function setEndpoint(endpoint: EndpointConfig) {
     app.use(fullPath, createProxyMiddleware({
         target: target.url,
         changeOrigin: true,
+
         ws: true,
         headers: auth ? {
             "x-api-key": auth
